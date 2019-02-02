@@ -1,0 +1,70 @@
+{
+  "name": "react-hooks-form",
+  "version": "1.0.0-alpha.0",
+  "description": "This is a simple react form management package based on the new famous Hooks API.",
+  "main": "es/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilxanlar/react-hooks-form.git"
+  },
+  "keywords": [
+    "react",
+    "hook",
+    "form"
+  ],
+  "scripts": {
+    "build": "rm -rf es && ./node_modules/.bin/babel src -d es",
+    "start": "webpack-dev-server --config ./demo/webpack.js --watch",
+    "format": "prettier-eslint --write \"src/**/*.js\"",
+    "lint": "eslint src",
+    "prepublish": "npm run build",
+    "test": "jest"
+  },
+  "author": "Mehdi Namvar",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "7.2.3",
+    "@babel/core": "7.2.2",
+    "@babel/plugin-transform-modules-umd": "7.2.0",
+    "@babel/preset-env": "7.2.3",
+    "@babel/preset-react": "7.0.0",
+    "babel-eslint": "10.0.1",
+    "babel-jest": "24.0.0",
+    "babel-loader": "8.0.5",
+    "eslint": "5.12.0",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-jsx-a11y": "6.1.2",
+    "eslint-plugin-react": "7.12.4",
+    "husky": "1.3.1",
+    "jest": "24.0.0",
+    "lint-staged": "8.1.0",
+    "prettier-eslint": "8.8.2",
+    "prettier-eslint-cli": "4.7.1",
+    "react": "16.8.0-alpha.1",
+    "react-dom": "16.8.0-alpha.1",
+    "react-test-renderer": "16.7.0",
+    "react-testing-library": "5.4.4",
+    "webpack": "4.28.4",
+    "webpack-cli": "3.2.1",
+    "webpack-dev-server": "3.1.14"
+  },
+  "peerDependencies": {
+    "react": "16.8.0-alpha.1",
+    "react-dom": "16.8.0-alpha.1"
+  },
+  "dependencies": {
+    "prop-types": "15.6.2"
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "prettier-eslint --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}

@@ -1,0 +1,106 @@
+* {
+  box-sizing: border-box;
+  outline: none !important;
+}
+
+body {
+  background-color: #333;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+h1, h2, h3 {
+  margin: 0 0 1em;
+}
+
+button {
+  background-color: seagreen;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 13px;
+  padding: 10px 30px;
+}
+
+input, textarea {
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  color: #fff;
+  display: block;
+  font-size: 13px;
+  padding: 10px;
+  width: 100%;
+}
+
+textarea {
+  max-height: 200px;
+  max-width: 100%;
+  min-height: 100px;
+  min-width: 100%;
+}
+
+input:focus, textarea:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.code-block pre {
+  background-color: #f7f7f7 !important;
+  border-radius: 3px !important;
+  font-size: 13px;
+  margin: 20px 0 !important;
+  padding: 10px 15px !important;
+}
+
+.examples {
+  column-count: 2;
+  column-gap: 40px;
+  padding: 40px;
+}
+
+.example {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  display: inline-block;
+  margin-bottom: 40px;
+  padding: 50px;
+  width: 100%;
+}
+
+.form-field {
+  margin-bottom: 15px;
+}
+
+.form-field label {
+  color: #777;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-errors {
+  background: indianred;
+  border-radius: 4px;
+  color: #fff;
+  margin-bottom: 20px;
+  padding: 15px 20px;
+}
+
+.form-errors ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.form-errors ul li {
+  margin: 0;
+  padding: 0;
+}
