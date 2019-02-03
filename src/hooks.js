@@ -103,7 +103,6 @@ export {
   useFormFieldValue,
   useFormIsTouched,
   useFormMetaValue,
-  useFormName,
   useFormStatus,
   useFormSubmit,
   useFormValues

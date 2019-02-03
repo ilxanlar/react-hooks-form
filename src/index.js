@@ -7,7 +7,6 @@ export { default as Provider } from './Provider';
 // Hooks
 export {
   useForm,
-  useFormName,
   useFormFieldValue,
   useFormIsTouched,
   useFormMetaValue,
