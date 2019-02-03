@@ -44,7 +44,7 @@ Form.propTypes = {
   className: PropTypes.string,
   destroyOnUnmount: PropTypes.bool,
   initialValues: PropTypes.object,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   onSubmit: PropTypes.func,
   onSubmitComplete: PropTypes.func,
   onSubmitFail: PropTypes.func,

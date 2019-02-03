@@ -4,15 +4,21 @@ import { FormContext } from './context';
 import { useFormApi } from './hooks';
 import { createLocalStore } from './store';
 
+function generateRandomName() {
+  return `_${Math.random().toString(36).substr(2, 9)}`;
+}
+
 function FormBuilder(props) {
   const {
     children,
     destroyOnUnmount,
     initialValues,
-    name,
+    name: nameFromProps,
     validate
   } = props;
 
+  const nameRef = useRef(nameFromProps || generateRandomName());
+  const name = nameRef.current;
   const localForm = useRef();
   const globalForm = useFormApi(name);
 
@@ -60,7 +66,7 @@ function FormBuilder(props) {
 FormBuilder.propTypes = {
   destroyOnUnmount: PropTypes.bool,
   initialValues: PropTypes.object,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   validate: PropTypes.func
 };
 
