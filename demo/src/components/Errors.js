@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormStatus } from '../../../src';
+import { useFormStatus } from '../hooksForm';
 
 function Errors({ component: ErrorsComponent, ...rest }) {
   const { error, submitFailed } = useFormStatus();

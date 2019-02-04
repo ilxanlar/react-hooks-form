@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormStatus } from '../../../src';
+import { useFormStatus } from '../hooksForm';
 
 function Submit({ className, text, ...rest }) {
   const { submitting } = useFormStatus();
