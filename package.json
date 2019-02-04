@@ -1,6 +1,6 @@
 {
   "name": "react-hooks-form",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "This is a simple react form management package based on the new famous Hooks API.",
   "main": "es/index.js",
   "repository": {
