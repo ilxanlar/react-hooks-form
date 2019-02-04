@@ -4,7 +4,7 @@ We expose some react hooks that might be really useful.
 Please keep in mind that in all hooks, You can skip passing **formName** if you're inside the form component tree.
 
 
-## useFormFieldValue(fieldName[, formName])
+### useFormFieldValue(fieldName[, formName])
 
 Use this hook to get the value of a field.
 
@@ -19,7 +19,7 @@ function Subtotal({ price }) {
 ```
 
 
-## useFormValues([formName])
+### useFormValues([formName])
 
 Use this hook to get the whole form values.
 
@@ -32,11 +32,11 @@ function FormLog() {
 ```
 
 
-## useFormStatus([formName])
+### useFormStatus([formName])
 
-This hook returns the form status flags: `submitting`, `submitSucceeded`, `submitFailed` and `error` as an object:
+This hook returns the form status flags: `submitting`, `submitSucceeded`, `submitFailed` and `error` as an object.
 
-This is a example of showing form errors:
+For example, the following component displays form errors:
 
 ```jsx harmony
 function FormErrors() {
@@ -52,32 +52,35 @@ function FormErrors() {
 }
 ```
 
-Or suppose you want to add a loading status on the button while the form is being sent:
+Or suppose you want to add a loading status on the button while the form is being submitted:
 
 ```jsx harmony
-function Submit({ text }) {
+function Submit() {
   const { submitting } = useFormStatus();
 
   return (
     <button type="submit">
-      {submitting ? 'Saving...' : text}
+      {submitting ? 'Saving...' : 'Save'}
     </button>
   );
 }
 ```
 
-You can do more and show a success message to the user by the help of`submitSucceeded` property on the status returned.
+You can do more and show a success message to the user by the help of `submitSucceeded` property on the status returned.
 
 
-## useFormMetaValue(metaName[, formName])
+### useFormMetaValue(metaName[, formName])
 
 This hook gives you the meta values of a form. Currently there is only one meta value and that is `isTouched`, but we plan to add more details later.
 
 For example, suppose you want to prevent user from going to another page when the form values are changed compared to initial values.
 
 ```jsx harmony
-function PreventTransition({ formName }) {
-  const isTouched = useFormMetaValue('isTouched', formName);
+import React from 'react';
+import { Prompt } from 'react-router';
+
+function PreventTransition() {
+  const isTouched = useFormMetaValue('isTouched');
 
   return (
     <Prompt
@@ -88,31 +91,30 @@ function PreventTransition({ formName }) {
 }
 ```
 
-By the way, there is a shortcut hook for this, you can `useFormIsTouched`:
+By the way, there is a shortcut hook for this, you can use the `useFormIsTouched([formName])` hook:
 
 ```
-const isTouched = useFormIsTouched('someFormName');
+const isTouched = useFormIsTouched();
 ```
 
 
-## useForm([formName])
+### useForm([formName])
 
 This hook exposes the form API and you can do much with it.
 
 ```jsx harmony
 function RemoteSubmitButton() {
-  const form = useFormApi('someFormName');
+  const form = useForm();
 
   const handleClick = () => {
     form.submit((data) => {
-      // Make your api request here
-      return new Promise(...);
+      return fetch(...);
     });
   };
 
   return (
     <button onClick={handleClick}>
-      Click to submit
+      Save
     </button>
   );
 }
@@ -120,20 +122,20 @@ function RemoteSubmitButton() {
 
 You can find all available methods in the following table:
 
-| Method                        |
-| ----------------------------- |
-| changeFieldValue(name, value) |
-| clearFieldValue(name)         |
-| clearValues()                 |
-| getFieldValue(name)           |
-| getMetaValue(name)            |
-| getStatus()                   |
-| getValues()                   |
-| initialize(initialValues)     |
-| reinitialize()                |
-| submit(onSubmit, options)     |
-| validate()                    |
-| watchFieldValue()             |
-| watchMetaValue()              |
-| watchFormValues()             |
-| watchStatus()                 |
+| Method                              |
+| ----------------------------------- |
+| changeFieldValue(name, value)       |
+| clearFieldValue(name)               |
+| clearValues()                       |
+| getFieldValue(name)                 |
+| getMetaValue(name)                  |
+| getStatus()                         |
+| getValues()                         |
+| initialize(initialValues)           |
+| reinitialize()                      |
+| submit(onSubmit, options)           |
+| validate()                          |
+| watchFieldValue(fieldName, watcher) |
+| watchMetaValue(metaName, watcher)   |
+| watchFormValues(watcher)            |
+| watchStatus(watcher)                |

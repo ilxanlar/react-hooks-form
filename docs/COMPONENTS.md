@@ -1,7 +1,7 @@
 # Components
 
 
-## Form
+### Form
 
 This is the component you need to build a form, basically you do this:
 
@@ -12,7 +12,7 @@ function SimpleForm() {
   }
 
   return (
-    <Form name="createArticle" onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       // fields...
     </Form>
   );
@@ -21,22 +21,22 @@ function SimpleForm() {
 
 The following table shows the available props you can pass to Form component:
 
-| Prop             | Type              |  |
-| ---------------- | ----------------- | --- |
-| destroyOnUnmount | bool              | Reset everything to initial state or not |
-| initialValues    | object            | Values to initialize form with |
-| name             | string (required) | Form name which is required |
-| onSubmit         | func              | A function which receives form data and returns a Promise. Read more about onSubmit below this table |
-| onSubmitComplete | func              | Fired whether form submission is successful or not |
-| onSubmitFail     | func              | Fired when submission fails |
-| onSubmitSucceed  | func              | Fired when submission succeeds |
-| validate         | func              | A function which receives form data and validates data. Read more about validate below this table |
+| Prop             | Type   |  |
+| ---------------- | ------ | --- |
+| destroyOnUnmount | bool   | Reset everything to initial state or not. Default is `true` |
+| initialValues    | object | Values to initialize form with |
+| name             | string | Optionally name your form |
+| onSubmit         | func   | A function which receives form data and returns a Promise. Read more about onSubmit below this table |
+| onSubmitComplete | func   | Fired whether form submission is successful or not |
+| onSubmitFail     | func   | Fired when submission fails |
+| onSubmitSucceed  | func   | Fired when submission succeeds |
+| validate         | func   | A function which receives form data and validates data. Read more about validate below this table |
 
 #### onSubmit
 
 This should be a function that receives form data and returns a Promise.
 If the returned Promise resolves, then submission is successful:
-If the returned Promise rejects, it should reject with an error object in shape of
+If the returned Promise rejects, it should reject with an error object in the following shape:
 
 ```
 {
@@ -65,15 +65,14 @@ function validate(data) {
   };
 
   return {
-    message: Object.keys(errors).length > 0
-      ? 'Some fields have errors' : '',
+    message: Object.keys(errors).length > 0 ? 'Some fields have errors' : '',
     errors: errors
   };
 }
 ```
 
 
-## FormField
+### FormField
 
 Use this component to build a field, you need to pass you input component to FormField:
 
