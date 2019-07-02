@@ -1,10 +1,10 @@
-import React from 'react';
-import { useFormStatus } from '../../../src';
+import React, { memo } from 'react';
+import { useFormMeta } from '../react-hooks-form';
 
-function Errors({ component: ErrorsComponent, ...rest }) {
-  const { error, submitFailed } = useFormStatus();
+function FormErrors({ name, ...rest }) {
+  const { error, submitFailed } = useFormMeta(name);
 
-  if (submitFailed) {
+  if (submitFailed && error) {
     const { message, errors } = error;
 
     return (
@@ -27,4 +27,4 @@ function Errors({ component: ErrorsComponent, ...rest }) {
   return null;
 }
 
-export default Errors;
+export default memo(FormErrors);

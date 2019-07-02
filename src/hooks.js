@@ -1,110 +1,94 @@
-import { useContext, useEffect, useState } from 'react';
-import { FormContext, StoreContext } from './context';
-
-function useFormName(formName) {
-  const formContext = useContext(FormContext);
-  return formName || (formContext ? formContext.name : '');
-}
+import { useContext, useLayoutEffect, useMemo, useState } from 'react';
+import clone from 'lodash/clone';
+import getStore from './store';
+import FormContext from './context';
 
 function useFormApi(formName) {
-  const name = useFormName(formName);
-  const storeContext = useContext(StoreContext);
   const formContext = useContext(FormContext);
-
-  if (storeContext) {
-    return storeContext.form(name);
-  }
-
-  if (formContext) {
-    return formContext.form;
-  }
-
-  return undefined;
+  const name = formName || (formContext ? formContext.name : '');
+  const storeContext = getStore();
+  return storeContext.form(name);
 }
 
 function useForm(formName) {
   const form = useFormApi(formName);
 
-  return {
-    changeFieldValue: (...params) => form.changeFieldValue(...params),
-    clearFieldValue: (...params) => form.clearFieldValue(...params),
-    clearValues: (...params) => form.clearValues(...params),
-    getFieldValue: (...params) => form.getFieldValue(...params),
-    getMetaValue: (...params) => form.getMetaValue(...params),
-    getStatus: (...params) => form.getStatus(...params),
-    getValues: (...params) => form.getValues(...params),
-    initialize: (...params) => form.initialize(...params),
-    reinitialize: (...params) => form.reinitialize(...params),
-    submit: (...params) => form.submit(...params),
-    validate: (...params) => form.validate(...params),
-    watchFieldValue: (...params) => form.watchFieldValue(...params),
-    watchMetaValue: (...params) => form.watchMetaValue(...params),
-    watchFormValues: (...params) => form.watchFormValues(...params),
-    watchStatus: (...params) => form.watchStatus(...params)
-  };
+  const realName = form.getName();
+
+  return useMemo(
+    () => ({
+      getFieldValue: form.getFieldValue,
+      changeFieldValue: form.changeFieldValue,
+      getFieldMeta: form.getFieldMeta,
+      changeFieldMeta: form.changeFieldMeta,
+      getMeta: form.getFormMeta,
+      getValues: form.getFormValues,
+      initialize: form.initialize,
+      reset: form.reset,
+      submit: form.submit
+    }),
+    [realName]
+  );
+}
+
+function useFormFieldMeta(fieldName, formName) {
+  const form = useFormApi(formName);
+  const [fieldMeta, setFieldMeta] = useState(form.getFieldMeta(fieldName));
+
+  useLayoutEffect(
+    () =>
+      form.watchFieldMeta(fieldName, meta => {
+        setFieldMeta(meta);
+      }),
+    [fieldName, formName]
+  );
+
+  return fieldMeta;
 }
 
 function useFormFieldValue(fieldName, formName) {
   const form = useFormApi(formName);
   const [fieldValue, setFieldValue] = useState(form.getFieldValue(fieldName));
 
-  useEffect(() => form.watchFieldValue(fieldName, (value) => {
-    setFieldValue(value);
-  }));
+  useLayoutEffect(
+    () =>
+      form.watchFieldValue(fieldName, value => {
+        setFieldValue(value);
+      }),
+    [fieldName, formName]
+  );
 
   return fieldValue;
 }
 
 function useFormValues(formName) {
   const form = useFormApi(formName);
-  const [values, setValues] = useState(form.getValues());
+  const [values, setValues] = useState(form.getFormValues());
 
-  useEffect(() => form.watchFormValues((value) => {
-    setValues(value);
-  }));
+  useLayoutEffect(
+    () =>
+      form.watchFormValues(payload => {
+        setValues(clone(payload));
+      }),
+    [formName]
+  );
 
   return values;
 }
 
-function useFormMetaValue(metaName, formName) {
+function useFormMeta(formName) {
   const form = useFormApi(formName);
-  const [metaValue, setMetaValue] = useState(form.getMetaValue(metaName));
+  const [data, setData] = useState(form.getFormMeta());
 
-  useEffect(() => form.watchMetaValue(metaName, (value) => {
-    setMetaValue(value);
-  }));
+  useLayoutEffect(
+    () =>
+      form.watchFormMeta(payload => {
+        setData(clone(payload));
+      }),
+    [formName]
+  );
 
-  return metaValue;
+  return data;
 }
 
-function useFormIsTouched(formName) {
-  return useFormMetaValue('isTouched', formName);
-}
-
-function useFormStatus(formName) {
-  const form = useFormApi(formName);
-  const [status, setStatus] = useState(form.getStatus());
-
-  useEffect(() => form.watchStatus((payload) => {
-    setStatus(payload);
-  }));
-
-  return status;
-}
-
-function useFormSubmit(formName) {
-  const form = useFormApi(formName);
-  return (onSubmit, options) => form.submit(onSubmit, options);
-}
-
-export {
-  useForm,
-  useFormApi,
-  useFormFieldValue,
-  useFormIsTouched,
-  useFormMetaValue,
-  useFormName,
-  useFormStatus,
-  useFormSubmit,
-  useFormValues
-};
+export { useForm, useFormApi, useFormMeta, useFormValues, useFormFieldMeta, useFormFieldValue };

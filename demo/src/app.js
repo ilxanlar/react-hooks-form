@@ -1,22 +1,14 @@
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, Provider } from './hooksForm';
-import ExampleBasic from './examples/Basic';
+import ExampleValidation from './examples/Validation';
 
-function App() {
-  const formStore = createStore();
-
-  return (
+ReactDOM.render(
+  (
     <StrictMode>
-      <Provider store={formStore}>
-        <main className="app">
-          <div className="examples">
-            <ExampleBasic />
-          </div>
-        </main>
-      </Provider>
+      <main className="app">
+        <ExampleValidation />
+      </main>
     </StrictMode>
-  );
-}
-
-ReactDOM.render(<App />, document.getElementById('root'));
+  ),
+  document.getElementById('root')
+);

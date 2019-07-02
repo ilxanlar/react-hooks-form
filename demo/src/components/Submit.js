@@ -1,8 +1,8 @@
-import React from 'react';
-import { useFormStatus } from '../../../src';
+import React, { memo } from 'react';
+import { useFormMeta } from '../react-hooks-form';
 
 function Submit({ className, text, ...rest }) {
-  const { submitting } = useFormStatus();
+  const { submitting } = useFormMeta();
 
   return (
     <button className="form-submit" disabled={submitting} type="submit" {...rest}>
@@ -11,4 +11,4 @@ function Submit({ className, text, ...rest }) {
   );
 }
 
-export default Submit;
+export default memo(Submit);

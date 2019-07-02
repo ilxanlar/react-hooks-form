@@ -1,29 +1,76 @@
-# Hooks Form
+# React Hooks Form
 
-This is a simple react form management package based on the new famous Hooks API.
+React Hooks Form offers an easy way to manage your forms in React.
+It's built using the famous React Hooks!
+
+
+### Documentation
+
+You can find the complete documentation [here](https://ilxanlar.github.io/react-hooks-form).
+
+
+### Usage
+
+Install via NPM or Yarn:
+
+```
+npm install react-hooks-form --save
+yarn add react-hooks-form
+```
+
+
+The following code snippet is a basic example of using React Hooks Form.
 
 ```jsx harmony
-import React from 'react';
-import { Form } from 'react-hooks-form';
+import React from 'react'
+import { Form, FormField } from 'react-hooks-form'
 
-function createNewArticle(data) {
-  return fetch('/article', {
-    body: JSON.stringify(data),
-    method: 'post'
-  });
+async function handleSubmit(values) {
+  try {
+    await _myApiRequest(values)
+  } catch (error) {
+    alert(error.message)
+  }
 }
 
-function CreateArticle() {
+function SignUpForm() {
   return (
-    <Form name="createArticle" onSubmit={createNewArticle}>
-      ...
+    <Form onSubmit={handleSubmit}>
+      <FormField component="input" name="fullName" type="text" />
+      <FormField component="input" name="email" type="text" />
+      <FormField component="input" name="password" type="password" />
+      <button type="submit">Sign Up</button>
     </Form>
-  );
+  )
 }
 ```
 
-Read more about react-hooks-form in the documentation:
 
-- [Quick Start](docs/QUICK_START.md)
-- [Components](docs/COMPONENTS.md)
-- [Hooks](docs/HOOKS.md)
+### Hooks
+
+```js
+// Hook to field value
+const amount = useFormFieldValue('amount')
+
+// Hook to field error, focus status and ...
+const {
+  active,
+  error,
+  invalid,
+  visited
+} = useFormFieldMeta('amount')
+
+// Hook to get form all values
+const values = useFormValues()
+
+// Hook to form submission status, errors and ...
+const {
+  submitting,
+  submitFailed,
+  submitSucceeded,
+  error
+} = useFormMeta()
+
+// Hook to access form API
+const formApi = useForm() // There are plenty of methods
+```
