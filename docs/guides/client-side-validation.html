@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Client-side Validation · React Hooks Form</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;p&gt;You can easily add client-side validation to your forms. Just write a validation function that takes form values and returns an object of errors (if there are any). Then, pass this validation function to the &lt;code&gt;Form&lt;/code&gt; component as &lt;code&gt;validate&lt;/code&gt; prop.&lt;/p&gt;
+"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Client-side Validation · React Hooks Form"/><meta property="og:type" content="website"/><meta property="og:url" content="https://ilxanlar.github.io/react-hooks-form/"/><meta property="og:description" content="&lt;p&gt;You can easily add client-side validation to your forms. Just write a validation function that takes form values and returns an object of errors (if there are any). Then, pass this validation function to the &lt;code&gt;Form&lt;/code&gt; component as &lt;code&gt;validate&lt;/code&gt; prop.&lt;/p&gt;
+"/><meta property="og:image" content="https://ilxanlar.github.io/react-hooks-form/img/react-hooks-form.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://ilxanlar.github.io/react-hooks-form/img/react-hooks-form.png"/><link rel="shortcut icon" href="/react-hooks-form/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/react-hooks-form/js/scrollSpy.js"></script><link rel="stylesheet" href="/react-hooks-form/css/prism.css"/><link rel="stylesheet" href="/react-hooks-form/css/main.css"/><script src="/react-hooks-form/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/react-hooks-form/"><img class="logo" src="/react-hooks-form/img/react-hooks-form-header-icon.png" alt="React Hooks Form"/><h2 class="headerTitleWithLogo">React Hooks Form</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/react-hooks-form/docs/getting-started/overview" target="_self">Getting Started</a></li><li class="siteNavGroupActive"><a href="/react-hooks-form/docs/guides/organize-fields" target="_self">Guides</a></li><li class="siteNavGroupActive"><a href="/react-hooks-form/docs/components/Form" target="_self">Components</a></li><li class="siteNavGroupActive"><a href="/react-hooks-form/docs/hooks/useFormFieldValue" target="_self">Hooks</a></li><li class=""><a href="https://github.com/ilxanlar/react-hooks-form" target="_self">Github</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Guides</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/react-hooks-form/docs/getting-started/overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/react-hooks-form/docs/getting-started/usage">Usage</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Guides</h3><ul class=""><li class="navListItem"><a class="navItem" href="/react-hooks-form/docs/guides/organize-fields">Organizing Your Fields</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/react-hooks-form/docs/guides/client-side-validation">Client-side Validation</a></li><li class="navListItem"><a class="navItem" href="/react-hooks-form/docs/guides/server-side-validation">Server-side Validation</a></li><li class="navListItem"><a class="navItem" href="/react-hooks-form/docs/guides/input-component">Input Components</a></li><li class="navListItem"><a class="navItem" href="/react-hooks-form/docs/guides/form-submission">Form Submission</a></li><li class="navListItem"><a class="navItem" href="/react-hooks-form/docs/guides/using-hooks">Using Hooks</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Components</h3><ul class=""><li class="navListItem"><a class="navItem" href="/react-hooks-form/docs/components/Form">&lt;Form /&gt;</a></li><li class="navListItem"><a class="navItem" href="/react-hooks-form/docs/components/FormField">&lt;FormField /&gt;</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Hooks</h3><ul class=""><li class="navListItem"><a class="navItem" href="/react-hooks-form/docs/hooks/useFormFieldValue">useFormFieldValue</a></li><li class="navListItem"><a class="navItem" href="/react-hooks-form/docs/hooks/useFormFieldMeta">useFormFieldMeta</a></li><li class="navListItem"><a class="navItem" href="/react-hooks-form/docs/hooks/useFormValues">useFormValues</a></li><li class="navListItem"><a class="navItem" href="/react-hooks-form/docs/hooks/useFormMeta">useFormMeta</a></li><li class="navListItem"><a class="navItem" href="/react-hooks-form/docs/hooks/useForm">useForm</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Client-side Validation</h1></header><article><div><span><p>You can easily add client-side validation to your forms. Just write a validation function that takes form values and returns an object of errors (if there are any). Then, pass this validation function to the <code>Form</code> component as <code>validate</code> prop.</p>
+<p>Client-side validation runs every time a field value changes in the form so if your field is invalid, your field error will always be present.</p>
+<p>Remember the sign-up form? Let's add a validation function to it:</p>
+<pre><code class="hljs css language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> isEmpty<span class="token punctuation">,</span> isValidEmail <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./someValidators'</span>
+
+<span class="token keyword">function</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token parameter">formValues</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> errors <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>formValues<span class="token punctuation">.</span>email<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    errors<span class="token punctuation">.</span>email <span class="token operator">=</span> <span class="token string">'Email is required!'</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isValidEmail</span><span class="token punctuation">(</span>formValues<span class="token punctuation">.</span>email<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    errors<span class="token punctuation">.</span>email <span class="token operator">=</span> <span class="token string">'Email you entered is invalid.'</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>formValues<span class="token punctuation">.</span>password<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    errors<span class="token punctuation">.</span>password <span class="token operator">=</span> <span class="token string">'Password is required!'</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    <span class="token comment">// This is a generic message of what happened</span>
+    <span class="token comment">// OPTIONAL</span>
+    message<span class="token punctuation">:</span> <span class="token string">'Please fix these validation errors and try again:'</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// These are field errors sent back from the server</span>
+    errors<span class="token punctuation">:</span> errors
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Providing <code>message</code> is completely optional. This is only an extra message to better describe why the form submission failed!</p>
+<p>Bear in mind that this is only client-side validation. You would also validate form values on the server and send back the errors. You will learn more about this in the next sections.</p>
+<h2><a class="anchor" aria-hidden="true" id="arrays-and-objects-validation"></a><a href="#arrays-and-objects-validation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Arrays and Objects Validation</h2>
+<p>We expect you use a flat error object for nested fields. Consider the following fields:</p>
+<pre><code class="hljs css language-jsx harmony"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FormField</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product.name<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FormField</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>product.price<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FormField</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>options[1].label<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FormField</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>options[1].value<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+</code></pre>
+<p>We expect to get error in this format:</p>
+<pre><code class="hljs css language-js"><span class="token punctuation">{</span>
+  message<span class="token punctuation">:</span> <span class="token string">'Validation failed!'</span><span class="token punctuation">,</span>
+  errors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">"product.name"</span><span class="token punctuation">:</span> <span class="token string">'...'</span><span class="token punctuation">,</span>
+    <span class="token string">"product.price"</span><span class="token punctuation">:</span> <span class="token string">'...'</span><span class="token punctuation">,</span>
+    <span class="token string">"options[1].label"</span><span class="token punctuation">:</span> <span class="token string">'...'</span><span class="token punctuation">,</span>
+    <span class="token string">"options[1].value"</span><span class="token punctuation">:</span> <span class="token string">'...'</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="displaying-validation-errors"></a><a href="#displaying-validation-errors" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Displaying Validation Errors</h2>
+<p>There are two ways to display validation errors</p>
+<ul>
+<li>Display all errors together</li>
+<li>Display errors separately on each field</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="display-all-errors-together"></a><a href="#display-all-errors-together" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Display all errors together</h3>
+<p>In order to access the form errors you're going to use a hook, <code>useFormMeta</code> hook. It's easy to write a component that renders the validation errors. We want to display the errors if the form submission has failed:</p>
+<pre><code class="hljs css language-jsx"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> useFormMeta <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-hooks-form'</span>
+
+<span class="token keyword">function</span> <span class="token function">ValidationErrors</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> error<span class="token punctuation">,</span> submitFailed <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useFormMeta</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  <span class="token comment">// Render errors if submit failed and have errors</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>submitFailed <span class="token operator">&amp;&amp;</span> error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-errors<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span><span class="token punctuation">{</span>error<span class="token punctuation">.</span>message<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+          <span class="token punctuation">{</span>Object<span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span>error<span class="token punctuation">.</span>errors<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> key</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">key</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>key<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token punctuation">{</span>err<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+          <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> <span class="token keyword">null</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Finally, our sign-up form will look like this:</p>
+<pre><code class="hljs css language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Form</span></span> <span class="token attr-name">onSubmit</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>handleSubmit<span class="token punctuation">}</span></span> <span class="token attr-name">validate</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>validate<span class="token punctuation">}</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">ValidationErrors</span></span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FormField</span></span> <span class="token attr-name">component</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>input<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>fullName<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FormField</span></span> <span class="token attr-name">component</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>input<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>email<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FormField</span></span> <span class="token attr-name">component</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>input<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Sign Up<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Form</span></span><span class="token punctuation">></span></span>
+</code></pre>
+<blockquote>
+<p>If you plan to display all errors together,
+you should know that <code>error</code> gets updated only when you submit the form.</p>
+</blockquote>
+<h3><a class="anchor" aria-hidden="true" id="display-errors-separately-on-each-field"></a><a href="#display-errors-separately-on-each-field" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Display errors separately on each field</h3>
+<p>We're going to write a component that renders field error simply by putting <code>&lt;FieldError/&gt;</code> besides the field, for example:</p>
+<pre><code class="hljs css language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FormField</span></span> <span class="token attr-name">component</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>input<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>email<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FieldError</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>email<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+</code></pre>
+<p>We're going to use <code>useFormFieldMeta</code> hook for getting info about the field:</p>
+<pre><code class="hljs css language-jsx"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> useFormFieldMeta <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-hooks-form'</span>
+
+<span class="token keyword">function</span> <span class="token function">FieldError</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> name <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> error<span class="token punctuation">,</span> invalid<span class="token punctuation">,</span> visited <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useFormFieldMeta</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>visited <span class="token operator">&amp;&amp;</span> invalid<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>field-error<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token punctuation">{</span>error<span class="token punctuation">}</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> <span class="token keyword">null</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Finally, our sign-up form will look like this:</p>
+<pre><code class="hljs css language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Form</span></span> <span class="token attr-name">onSubmit</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>handleSubmit<span class="token punctuation">}</span></span> <span class="token attr-name">validate</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>validate<span class="token punctuation">}</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FormField</span></span> <span class="token attr-name">component</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>input<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>fullName<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FormField</span></span> <span class="token attr-name">component</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>input<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>email<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FieldError</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>email<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FormField</span></span> <span class="token attr-name">component</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>input<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FieldError</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Sign Up<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Form</span></span><span class="token punctuation">></span></span>
+</code></pre>
+<blockquote>
+<p>When you submit the form, all the fields are marked as visited.</p>
+</blockquote>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/react-hooks-form/docs/guides/organize-fields"><span class="arrow-prev">← </span><span>Organizing Your Fields</span></a><a class="docs-next button" href="/react-hooks-form/docs/guides/server-side-validation"><span>Server-side Validation</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#arrays-and-objects-validation">Arrays and Objects Validation</a></li><li><a href="#displaying-validation-errors">Displaying Validation Errors</a><ul class="toc-headings"><li><a href="#display-all-errors-together">Display all errors together</a></li><li><a href="#display-errors-separately-on-each-field">Display errors separately on each field</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/react-hooks-form/" class="nav-home"></a><div><h5>Docs</h5><a href="/react-hooks-form/docs/getting-started/overview">Getting Started</a><a href="/react-hooks-form/docs/guides/organize-fields">Guides</a><a href="/react-hooks-form/docs/components/Form">Components</a><a href="/react-hooks-form/docs/hooks/useFormFieldValue">Hooks</a></div><div><h5>Community</h5><a href="http://stackoverflow.com/questions/tagged/react-hooks-form" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/ilxanlar/react-hooks-form" data-icon="octicon-star" data-count-href="/ilxanlar/react-hooks-form/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 Mehdi Namvar</section></footer></div></body></html>
