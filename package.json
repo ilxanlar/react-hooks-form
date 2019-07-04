@@ -1,7 +1,7 @@
 {
   "name": "react-hooks-form",
   "version": "2.0.0",
-  "description": "This is a simple react form management package based on the new famous Hooks API.",
+  "description": "React Forms the Hooks Way",
   "main": "es/index.js",
   "repository": {
     "type": "git",
@@ -13,11 +13,14 @@
     "form"
   ],
   "scripts": {
-    "build": "rm -rf es && ./node_modules/.bin/babel src -d es",
+    "build": "yarn build:es && yarn build:umd && yarn build:umd:min",
+    "build:es": "rm -rf es && ./node_modules/.bin/babel src -d es",
+    "build:umd": "NODE_ENV=development webpack src/index.js -o dist/react-hooks-form.js",
+    "build:umd:min": "NODE_ENV=production webpack src/index.js -o dist/react-hooks-form.min.js",
     "start": "webpack-dev-server --config ./demo/webpack.js --watch",
     "format": "prettier-eslint --write \"src/**/*.js\"",
     "lint": "eslint src",
-    "prepublish": "npm run build",
+    "prepublish": "yarn build",
     "test": "jest"
   },
   "author": "Mehdi Namvar",
