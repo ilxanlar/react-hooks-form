@@ -81,11 +81,11 @@
 <tr><td>enableReinitialize</td><td>bool</td><td>Whether to re-initialize the form every time <code>initialValues</code> changes. Default is <code>false</code>.</td></tr>
 <tr><td>visitOnBlur</td><td>bool</td><td>Mark the fields as <code>visited</code> when the field is blurred. Default is <code>true</code>.</td></tr>
 <tr><td>visitOnChange</td><td>bool</td><td>Mark the fields as <code>visited</code> when the field is changed. Default is <code>false</code>.</td></tr>
-<tr><td>onSubmit</td><td>func</td><td><strong>REQUIRED!</strong> A function which receives form data and returns a Promise. Read more about onSubmit below this table</td></tr>
+<tr><td>onSubmit</td><td>func</td><td><strong>REQUIRED!</strong> A function which receives form data and returns a Promise. Read more about onSubmit in <a href="/react-hooks-form/docs/guides/form-submission">Form Submission</a>.</td></tr>
 <tr><td>onSubmitComplete</td><td>func</td><td>Fired whether form submission is successful or not</td></tr>
 <tr><td>onSubmitFail</td><td>func</td><td>Fired when submission fails</td></tr>
 <tr><td>onSubmitSucceed</td><td>func</td><td>Fired when submission succeeds</td></tr>
-<tr><td>validate</td><td>func</td><td>A function which receives form data and validates data. Read more about validate below this table</td></tr>
+<tr><td>validate</td><td>func</td><td>A function which receives form data and returns the errors, if there are any invalid fields. Read more about validate in <a href="/react-hooks-form/docs/guides/client-side-validation">Client-side Validation</a>.</td></tr>
 <tr><td>destroyOnUnmount</td><td>bool</td><td>Reset everything to initial state or not. Default is <code>true</code>.</td></tr>
 </tbody>
 </table>
