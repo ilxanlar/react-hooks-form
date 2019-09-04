@@ -45,7 +45,7 @@ export default function apiField(params, api) {
     api.forEachField(field => {
       if (!api.getFieldMeta(field, 'isServerSideError') || field === fieldJustChanged) {
         const payload = { ...extraFieldMeta };
-        const fieldErrors = errors[field];
+        const fieldErrors = errors ? errors[field] : undefined;
 
         if (fieldErrors) {
           payload.invalid = true;
