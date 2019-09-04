@@ -64,7 +64,7 @@ export default function apiForm(params, api) {
     });
   };
 
-  api.submit = () => {
+  api.submit = (params = {}) => {
     let error = api.validateForm({ visited: true });
 
     if (typeof error !== 'undefined') {
@@ -86,8 +86,14 @@ export default function apiForm(params, api) {
       onSubmit(api.getFormValues())
         .then(result => {
           api.submitSucceeded(result);
+          if (typeof params.onSucceed === 'function') {
+            params.onSucceed(result);
+          }
           if (typeof onSucceed === 'function') {
             onSucceed(result);
+          }
+          if (typeof params.onComplete === 'function') {
+            params.onComplete();
           }
           if (typeof onComplete === 'function') {
             onComplete();
@@ -100,8 +106,14 @@ export default function apiForm(params, api) {
             });
           }
           api.submitFailed(error);
+          if (typeof params.onFail === 'function') {
+            params.onFail(error);
+          }
           if (typeof onFail === 'function') {
             onFail(error);
+          }
+          if (typeof params.onComplete === 'function') {
+            params.onComplete();
           }
           if (typeof onComplete === 'function') {
             onComplete();
